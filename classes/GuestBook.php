@@ -9,6 +9,7 @@
 class GuestBook
 {
     private $records;
+    private $path;
 
 
 
