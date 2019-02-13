@@ -1,27 +1,39 @@
-﻿<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Моё изучение PHP</title>
-</head>
-<body>
-<H1>Курс PHP-1</H1>
+﻿<?php
+require __DIR__ . '/classes/GuestBook.php';
 
-<a href="/calcul.php">Калькулятор</a>
-<br>
-<a href="/guestbook.php">Гостевая книга</a>
-<br>
-<a href="/guestbook-script.php">Гостевая книга</a>
-<br>
-<a href="/photo.php">Фотогалерея</a>
-<br>
-<a href="/photo2.php">Фотогалерея 2</a>
+$fh =__DIR__ . '/guestbook.txt';
+$guestbook = new GuestBook($fh);
 
-<br>
-<a href="/avtor.php">Авторизация</a>
 
-</body>
-</html<
+$list = $guestbook->getData();
+?>
+<table border="1" cellspacing="0">
+    <?php
+    foreach ($list as $record){ ?>
+        <tr bgcolor="aqua">
+            <td>Имя:</td>
+            <td>Сообщение:</td>
+        </tr>
+
+
+        <tr>
+            <?php
+            $rrec = explode('||',$record);
+            ?>
+            <td> <?php echo $rrec[0]; ?> </td>
+            <td> <?php if (!empty($rrec)) {
+                    echo $rrec[1];
+                } ?> </td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
+<p>
+<form action="/gbadd.php" method="post">
+    Имя: <input type="text" name="TC">
+    <br>
+    Сообщение:<input type="text" name="text">
+    <br>
+    <button type="submit">Добавить запись</button>
+</form>
