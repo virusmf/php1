@@ -1,5 +1,5 @@
 ﻿<?php
-require __DIR__ . '/classes/GuestBook.php';
+require_once __DIR__ . '/classes/GuestBook.php';
 
 $fh =__DIR__ . '/guestbook.txt';
 $guestbook = new GuestBook($fh);
